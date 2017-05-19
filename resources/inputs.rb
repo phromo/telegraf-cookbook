@@ -33,13 +33,6 @@ action :create do
     action :create
   end
 
-  chef_gem 'toml-rb' do
-    source node['telegraf']['rubysource']
-    clear_sources true
-    version '~> 0.3.0'
-    compile_time true if respond_to?(:compile_time)
-  end
-
   require 'toml'
 
   service "telegraf_#{new_resource.service_name}" do
@@ -50,7 +43,7 @@ action :create do
   end
 
   file "#{path}/#{name}_inputs.conf" do
-    content TOML.dump('inputs' => inputs)
+    content TOML::Generator.new('inputs' => inputs).body
     user 'root'
     group 'telegraf'
     mode new_resource.rootonly ? '0640' : '0644'

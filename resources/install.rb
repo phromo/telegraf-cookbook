@@ -25,6 +25,10 @@ property :install_type, String, default: 'package'
 default_action :create
 
 action :create do
+  chef_gem 'toml' do
+    version node['telegraf']['toml_gem_version']
+  end
+
   case install_type
   when 'package'
     if platform_family? 'rhel'
