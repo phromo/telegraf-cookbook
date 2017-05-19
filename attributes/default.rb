@@ -20,6 +20,8 @@
 # version of telegraf to install, e.g. '0.10.0-1' or nil for the latest
 default['telegraf']['version'] = nil
 default['telegraf']['install_type'] = 'package'
+
+default['telegraf']['toml_gem_version'] = '~> 0.1.2'
 default['telegraf']['rubysource'] = 'https://rubygems.org'
 
 default['telegraf']['download_urls'] = {
